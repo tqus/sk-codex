@@ -1,32 +1,95 @@
-# SK-Coder
+# SK-Codex
 
-SK-Coder is an ultra-fast, local-first Terminal User Interface (TUI) coding assistant built with [Textual](https://textual.textualize.io/) and powered by local LLMs via [Ollama](https://ollama.com/). Engineered specifically for low-resource hardware profiles (such as 8GB RAM laptops), it delivers low-latency code generation, real-time system monitoring, persistent session history, and built-in developer utility workflows.
-
----
-
-## Key Features
-
-* **Lightweight TUI Architecture:** Built using Textual, providing a smooth, responsive terminal interface complete with an interactive command autocomplete palette.
-* **Local LLM Integration:** Seamlessly connects to Ollama (`localhost:11434`), optimized for models like `qwen2:0.5b` and `qwen2.5-coder:1.5b` to maximize tokens-per-second performance on constrained hardware.
-* **Dynamic Effort Control:** Adjust reasoning depth on the fly (`low`, `med`, `high`) to balance response speed and analytical depth.
-* **Built-In Developer Skills Toolkit:** Instant execution of common repository tasks, including codebase scanning, security credential checks, statistics calculation, and bytecode cleanups.
-* **Automatic Code Preservation:** Automatically extracts markdown code snippets from assistant responses and saves them timestamped into a local `documents/` directory.
-* **Real-Time System Monitoring:** Integrated hardware sidebar tracking live CPU usage, memory consumption, and thermal sensors.
-* **Persistent Local Sessions:** Automatically saves conversation logs (`sk_coder_history.json`) and user login states locally.
+SK-Codex is a local-first Terminal User Interface (TUI) coding assistant built with [Textual](https://textual.textualize.io/) and powered by local LLMs via [Ollama](https://ollama.com/). Designed for speed, privacy, and low-latency code generation, it runs entirely on local hardware with real-time system monitoring, persistent chat history, and built-in developer workflows.
 
 ---
 
-## System Requirements
+## Features
 
-* **OS:** Linux / macOS / Windows (WSL)
-* **Python:** 3.10 or higher
-* **Backend:** [Ollama](https://ollama.com/) running locally with desired models pulled.
+* **Lightweight TUI Architecture:** Fully interactive terminal interface built with Textual, featuring split-pane layouts and keyboard shortcuts.
+* **Local LLM Integration:** Connects directly to Ollama (`localhost:11434`), optimized for high tokens-per-second performance with models like `qwen2.5-coder:1.5b`.
+* **Dynamic Effort Control:** Adjust reasoning and thinking depth dynamically (`low`, `med`, `high`).
+* **Real-Time System Metrics:** Live sidebar monitoring CPU usage, RAM utilization, and disk status via `psutil`.
+* **Automatic Code Preservation:** Automatically extracts markdown code blocks from assistant responses and saves them into a local `documents/` directory.
+* **Persistent History:** Automatically saves conversation logs to disk (`sk_codex_history.json`) across sessions.
 
 ---
 
 ## Installation
 
-1. **Clone the repository and navigate to the project directory:**
-   ```bash
-   git clone [https://github.com/your-username/sk-coder.git](https://github.com/your-username/sk-coder.git)
-   cd sk-coder
+1. **Clone the repository:**
+```bash
+git clone https://github.com/tqus/sk-codex.git
+cd sk-codex
+
+```
+
+
+2. **Create and activate a virtual environment:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+```
+
+
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+
+```
+
+
+4. **Ensure Ollama is running locally:**
+```bash
+ollama pull qwen2.5-coder:1.5b
+ollama serve
+
+```
+
+
+
+---
+
+## Usage
+
+Launch the application by running the main entry point:
+
+```bash
+python sk_codex.py
+
+```
+
+### Keyboard Shortcuts
+
+* **`Ctrl + C`**: Quit the application
+* **`Ctrl + L`**: Clear conversation history and reset log
+* **`F2`**: Toggle the system resource sidebar
+
+### Built-in Commands
+
+Type these commands directly into the prompt input:
+
+| Command | Description |
+| --- | --- |
+| `/help` | Display available command manual |
+| `/menu` | Open model selection options |
+| `/effort [level]` | Set reasoning effort (`low`, `med`, `high`) |
+| `/skills` | Access developer skills toolkit |
+| `/clear` | Clear chat log and memory |
+| `/exit` | Exit the application cleanly |
+
+---
+
+## Project Structure
+
+* `sk_codex.py`: Main application script containing the Textual app layout, system monitor widget, and Ollama integration worker.
+* `requirements.txt`: Python package dependencies (`textual`, `psutil`, `httpx`).
+* `documents/`: Directory where extracted code snippets are automatically stored.
+* `sk_codex_history.json`: Local storage file for chat conversation history.
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more details.
