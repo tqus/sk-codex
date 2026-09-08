@@ -32,7 +32,7 @@ DOCUMENTS_DIR.mkdir(exist_ok=True)
 SKILLS_DIR = Path("skills")
 SKILLS_DIR.mkdir(exist_ok=True)
 
-GROQ_API_KEY = "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"
+GROQ_API_KEY = "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"
 
 USER_PROFILE = {
     "name": "Saad Kashif",
